@@ -1,16 +1,17 @@
 from qiskit import Aer
 from lib.actors import Actor
 from lib.protocol import BB84
+from config import BITS_BASES_LENGTH, SAMPLE_SIZE
 
 print("Imports Successful")
 
 
 def bb84_without_intercept():
     # initialize actors and protocol
-    alice = Actor(length=20)
+    alice = Actor(length=BITS_BASES_LENGTH)
     print("Alice bits   = ", alice.bits)
     print("Alice bases  = ", alice.bases)
-    bob = Actor(length=20)
+    bob = Actor(length=BITS_BASES_LENGTH)
     print("Bob bases    = ", bob.bases)
     bb84 = BB84()
     backend = Aer.get_backend('aer_simulator')
@@ -30,7 +31,7 @@ def bb84_without_intercept():
     print("Bob key      = ", bob_key)
 
     # use random number of "good" bits in keys (just need to choose a sample size)
-    sample = bb84.bit_selection(length=len(alice.bits), sample_size=8)
+    sample = bb84.bit_selection(length=len(alice.bits), sample_size=SAMPLE_SIZE)
     bob_sample = bb84.sample_bits(bits=bob_key, selection=sample)
     alice_sample = bb84.sample_bits(bits=alice_key, selection=sample)
 
@@ -40,12 +41,12 @@ def bb84_without_intercept():
 
 def bb84_with_intercept():
     # initialize actors and protocol
-    alice = Actor(length=20)
+    alice = Actor(length=BITS_BASES_LENGTH)
     print("Alice bits   = ", alice.bits)
     print("Alice bases  = ", alice.bases)
-    bob = Actor(length=20)
+    bob = Actor(length=BITS_BASES_LENGTH)
     print("Bob bases    = ", bob.bases)
-    eve = Actor(length=20)
+    eve = Actor(length=BITS_BASES_LENGTH)
     print("Eve bases    = ", eve.bases)
 
     bb84 = BB84()
@@ -70,7 +71,7 @@ def bb84_with_intercept():
     print("Bob key      = ", bob_key)
 
     # use random number of "good" bits in keys (just need to choose a sample size)
-    sample = bb84.bit_selection(length=len(alice.bits), sample_size=8)
+    sample = bb84.bit_selection(length=len(alice.bits), sample_size=SAMPLE_SIZE)
     bob_sample = bb84.sample_bits(bits=bob_key, selection=sample)
     alice_sample = bb84.sample_bits(bits=alice_key, selection=sample)
 
