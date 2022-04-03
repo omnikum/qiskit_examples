@@ -14,5 +14,3 @@ SHOR_BASE = 7
 # 4. Посмотреть в сторону генератора случайных чисел
 # 5. Посмотреть в сторону реализации модели атак
 # 6. Посмотреть в сторону модификаций биби
-
-# code getting from https://qiskit.org/textbook/ch-states/introduction.html
