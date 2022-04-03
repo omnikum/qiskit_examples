@@ -14,3 +14,4 @@ class Actor:
         np.random.seed(seed)
         row = randint(2, size=length)
         return row
+

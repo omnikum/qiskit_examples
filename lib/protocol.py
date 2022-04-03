@@ -1,6 +1,7 @@
 from qiskit import QuantumCircuit, Aer, assemble
 import numpy as np
 from numpy.random import randint
+from math import pi
 class BB84:
 
     def encode_message(self, bits, bases):
@@ -14,18 +15,19 @@ class BB84:
 
         for i in range(length):
             qc = QuantumCircuit(1, 1)
-            if bases[i] == 0:  # Prepare qubit in Z-basis
+            if bases[i] == 0:     # Prepare qubit in Z-basis
                 if bits[i] == 0:
                     pass
                 else:
                     qc.x(0)
-            else:  # Prepare qubit in X-basis
+            elif bases[i] == 1:   # Prepare qubit in X-basis
                 if bits[i] == 0:
-                    qc.h(0)
+                    qc.h(0)       # 45 grad state
                 else:
                     qc.x(0)
-                    qc.h(0)
+                    qc.h(0)       # 135 grad state
             qc.barrier()
+            print(qc)
             message.append(qc)
         return message
 
